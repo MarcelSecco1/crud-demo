@@ -68,7 +68,7 @@ Basta fazer push na branch `main`:
 
 ```bash
 git add .
-git commit -m "feat: minha feature"
+git commit -m "Enviando: Nova alteração"
 git push origin main
 ```
 
