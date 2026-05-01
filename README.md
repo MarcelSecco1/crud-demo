@@ -32,7 +32,7 @@ Exemplo de aplicação PHP com CRUD completo, deploy automatizado via **GitHub A
 docker build -t crud-demo .
 
 # Rodar o container
-docker container run -p 8080:80 --name crud-demo -d crud-demo
+docker run -d -p 8080:80 --name crud-demo crud-demo
 
 # Acesse: http://localhost:8080
 ```
@@ -43,7 +43,7 @@ docker container run -p 8080:80 --name crud-demo -d crud-demo
 
 ### 1. Secrets do GitHub
 
-Vá ao repositório em **Settings → Secrets and variables → Actions** e adicione:
+Vá em **Settings → Secrets and variables → Actions** e adicione:
 
 | Secret | Valor |
 |---|---|
@@ -53,7 +53,7 @@ Vá ao repositório em **Settings → Secrets and variables → Actions** e adic
 | `SERVER_USER` | Usuário SSH (ex: `ubuntu`) |
 | `SERVER_SSH_KEY` | Conteúdo da chave SSH privada |
 
-### 2. Preparando o Servidor [Instância Nova]
+### 2. Preparando o Servidor
 
 ```bash
 # Instale o Docker no servidor (Ubuntu)

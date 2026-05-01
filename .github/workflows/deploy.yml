@@ -34,9 +34,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/crud-demo:latest
-            docker stop crud-demo || true
-            docker rm crud-demo || true
-            docker run -d \
+            docker container stop crud-demo || true
+            docker container rm crud-demo || true
+            docker container run -d \
               --name crud-demo \
               --restart always \
               -p 80:80 \

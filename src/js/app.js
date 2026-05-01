@@ -30,12 +30,47 @@ async function loadUsers() {
   }
 }
 
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validateFields(name, email) {
+  clearFieldErrors();
+  if (!name) {
+    markInvalid('name');
+    return 'O nome é obrigatório.';
+  }
+  if (name.length < 2) {
+    markInvalid('name');
+    return 'O nome deve ter ao menos 2 caracteres.';
+  }
+  if (!email) {
+    markInvalid('email');
+    return 'O e-mail é obrigatório.';
+  }
+  if (!isValidEmail(email)) {
+    markInvalid('email');
+    return 'Informe um e-mail válido (ex: nome@dominio.com).';
+  }
+  return null;
+}
+
+function markInvalid(fieldId) {
+  document.getElementById(fieldId).classList.add('invalid');
+}
+
+function clearFieldErrors() {
+  document.getElementById('name').classList.remove('invalid');
+  document.getElementById('email').classList.remove('invalid');
+}
+
 async function saveUser() {
   const id    = document.getElementById('edit-id').value;
   const name  = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
 
-  if (!name || !email) { showMsg('Preencha nome e e-mail.', 'error'); return; }
+  const erro = validateFields(name, email);
+  if (erro) { showMsg(erro, 'error'); return; }
 
   const isEdit = !!id;
   const url    = isEdit ? `${API}?id=${id}` : API;
@@ -87,6 +122,7 @@ function clearForm() {
   document.getElementById('email').value    = '';
   document.getElementById('form-title').textContent = 'Novo Usuário';
   document.getElementById('btn-cancel').classList.add('hidden');
+  clearFieldErrors();
 }
 
 function showMsg(text, type) {
