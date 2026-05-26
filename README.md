@@ -93,7 +93,7 @@ O pipeline irá automaticamente:
 **Body (POST/PUT):**
 ```json
 {
-        "id": 1,
+        "id": 2,
         "name": "Marcel Secco",
         "email": "marcelsecco1@gmail.com",
         "created_at": "2026-05-01 18:59:30"
